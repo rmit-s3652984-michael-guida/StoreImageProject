@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <Button
+        android:id="@+id/uploadSd3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:onClick="uploadFileToS3"
+        android:text="Upload S3 File"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/downloadSd3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Download S3 File"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/uploadSd3"
+        android:onClick="downloadFileFromS3"/>
+
+    <Button
+        android:id="@+id/fetchFileToS3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Fetch File From S3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/downloadSd3"
+        android:onClick="fetchFileFromS3"/>
+
+</android.support.constraint.ConstraintLayout>
+
+
+
+    <!--&lt;Button-->
+    <!--android:id=&quot;@+id/upload&quot;-->
+    <!--android:layout_width=&quot;match_parent&quot;-->
+    <!--android:layout_height=&quot;wrap_content&quot;-->
+    <!--android:text=&quot;Upload File to S3&quot;-->
+    <!--android:onClick=&quot;setFileToUpload&quot;/&gt;-->
+
+    <!--&lt;Button-->
+    <!--android:id=&quot;@+id/download&quot;-->
+    <!--android:layout_width=&quot;match_parent&quot;-->
+    <!--android:layout_height=&quot;wrap_content&quot;-->
+    <!--android:text=&quot;Download File from S3&quot;-->
+    <!--android:layout_below=&quot;@+id/upload&quot;-->
+    <!--android:layout_alignParentRight=&quot;true&quot;-->
+    <!--android:layout_alignParentEnd=&quot;true&quot;-->
+    <!--android:onClick=&quot;setFileToDownload&quot;/&gt;-->
