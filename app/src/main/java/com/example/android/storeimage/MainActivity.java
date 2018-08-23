@@ -29,9 +29,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     AmazonS3 s3Client;
-    String bucket = "s3demo11";
-    File uploadToS3 = new File("/storage/emulated/0/Pictures/Screenshots/Screenshot_20180723-115224.png");
-    File downloadFromS3 = new File("/storage/emulated/0/Download/Screenshot_20180723-115224.png");
+    String bucket = "rmitwalletbucket";
+    File uploadToS3 = new File("/storage/emulated/0/Pictures/Screenshots/Screenshot_20180822-133639.png");
     TransferUtility transferUtility;
     List<String> listing;
 
@@ -50,13 +49,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void s3credentialsProvider(){
 
-        // Initialize the AWS Credential
-        CognitoCachingCredentialsProvider cognitoCachingCredentialsProvider = new CognitoCachingCredentialsProvider(
+        // Initialize the Amazon Cognito credentials provider
+        CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
                 getApplicationContext(),
-                "us-west-2:0220b055-7f4d-443e-a2a0-1c00bab761c2", // Identity pool ID
-                Regions.US_WEST_2 // Region
+                "us-east-1:51b2116e-d852-46a3-9617-2b414f75b5fe", // Identity pool ID
+                Regions.US_EAST_1 // Region
         );
-        createAmazonS3Client(cognitoCachingCredentialsProvider);
+        createAmazonS3Client(credentialsProvider);
     }
 
 
@@ -66,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         s3Client = new AmazonS3Client(credentialsProvider);
 
         // Set the region of your S3 bucket
-        s3Client.setRegion(Region.getRegion(Regions.US_WEST_2));
+        s3Client.setRegion(Region.getRegion(Regions.US_EAST_1));
     }
 
     public void setTransferUtility(){
@@ -80,24 +79,13 @@ public class MainActivity extends AppCompatActivity {
 
         TransferObserver transferObserver = transferUtility.upload(
                 bucket,          /* The bucket to upload to */
-                "IMG_20180808_121133.jpg",/* The key for the uploaded object */
+                "Screenshot_20180822-133639.png",/* The key for the uploaded object */
                 uploadToS3       /* The file where the data to upload exists */
         );
 
         transferObserverListener(transferObserver);
     }
 
-
-
-    public void downloadFileFromS3(View view){
-
-        TransferObserver transferObserver = transferUtility.download(
-                bucket,     /* The bucket to download from */
-                "IMG_20180808_121133.jpg",    /* The key for the object to download */
-                downloadFromS3        /* The file to download the object to */
-        );
-        transferObserverListener(transferObserver);
-    }
 
     public void fetchFileFromS3(View view){
 
