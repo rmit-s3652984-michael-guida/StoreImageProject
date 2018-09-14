@@ -36,13 +36,12 @@ public class MainActivity extends AppCompatActivity {
     AmazonS3 s3Client;
     String bucket = "rmitwalletbucket";
     File uploadToS3 = new File("/storage/emulated/0/Pictures/Screenshots/Screenshot_20180822-133639.png");
-    //File downloadFromS3 = new File("/storage/emulated/0/Pictures/Screenshots/Screenshot_20180822-133639.png");
+    File downloadFromS3 = new File("/storage/emulated/0/Pictures/Screenshots/Screenshot_20180822-133639.png");
     TransferUtility transferUtility;
     List<String> listing;
 
     private final int STORAGE_PERMISSION_CODE = 1;
-    private final int MY_PERMISSIONS_READ_EXTERNAL_STORAGE = 1;
-
+    //Working upload now
 
 
     @Override
@@ -50,63 +49,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED){
-            Toast.makeText(MainActivity.this, "Permission is not granted ", Toast.LENGTH_SHORT).show();
-            }
-
-        if (ContextCompat.checkSelfPermission(MainActivity.this,
-                Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            // Permission is not granted
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,
-                    Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-            } else {
-                // No explanation needed; request the permission
-                ActivityCompat.requestPermissions(MainActivity.this,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        MY_PERMISSIONS_READ_EXTERNAL_STORAGE);
+        s3credentialsProvider();
 
 
-                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-                // app-defined int constant. The callback method gets the
-                // result of the request.
-            }
-        } else {
-            // Permission has already been granted
-            Toast.makeText(MainActivity.this, "Permission already granted ", Toast.LENGTH_SHORT).show();
-        }
-        //onRequestPermissionsResult();
+        setTransferUtility();
+
+
 
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case MY_PERMISSIONS_READ_EXTERNAL_STORAGE: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // permission was granted, yay! Do the
-                    // contacts-related task you need to do.
-                } else {
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                }
-                return;
-            }
 
-            // other 'case' lines to check for other
-            // permissions this app might request.
-        }
-    }
 
 
     public void s3credentialsProvider(){
@@ -150,12 +102,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void downloadFileFromS3(View view){
 
-//        TransferObserver transferObserver = transferUtility.download(
-//                bucket,     /* The bucket to download from */
-//                "Screenshot.png",    /* The key for the object to download */
-//                downloadFromS3        /* The file to download the object to */
-//        );
-//        transferObserverListener(transferObserver);
+        TransferObserver transferObserver = transferUtility.download(
+                bucket,     /* The bucket to download from */
+                "Screenshot.png",    /* The key for the object to download */
+                downloadFromS3        /* The file to download the object to */
+        );
+        transferObserverListener(transferObserver);
     }
 
 
