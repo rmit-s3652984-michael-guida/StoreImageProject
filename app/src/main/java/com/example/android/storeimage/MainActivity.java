@@ -35,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
     AmazonS3 s3Client;
     String bucket = "rmitwalletbucket";
-    File uploadToS3 = new File("/storage/emulated/0/Pictures/Screenshots/Screenshot_20180822-133639.png");
-    File downloadFromS3 = new File("/storage/emulated/0/Pictures/Screenshots/Screenshot_20180822-133639.png");
+    File uploadToS3 = new File("/storage/emulated/0/Pictures/Screenshots/Screenshot_20180914-132339.png");
+    File downloadFromS3 = new File("/storage/emulated/0/Pictures/Screenshots/Screenshot_20180914-132339.png");
     TransferUtility transferUtility;
     List<String> listing;
 
